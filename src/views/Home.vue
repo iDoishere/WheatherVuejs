@@ -4,8 +4,9 @@
 
     <div class="list-input-wrapper">
 
-      <div class="container1" @click="toggle">
+      <div :class="['input-field',flatInput]" @click="toggle">
         <input ref="email" :style="checkOpenList" v-model="searchCountry" type="text"
+
                placeholder="Search">
         <a class="icon-div">
           <i class="glyphicon glyphicon-search"></i>
@@ -36,9 +37,6 @@ export default {
       openInput: false,
       ifOverFlow: false,
       searchCountry: '',
-      styleInput: {
-        width: '160px',
-      },
     }
   },
   created() {
@@ -64,14 +62,18 @@ export default {
       countries: state => state.main.countries,
       fiveDays: state => state.main.fiveDaysForCast
     }),
-    // sets the width of input when user toggle
+
+    flatInput() {
+        return {
+          'flat-input-bottom': this.ifOverFlow
+        }
+    },
+
     checkOpenList() {
-      let style=null;
-      return (this.openInput ?  style = this.styleInput:'' )
+      return (this.openInput ? {'--open-input':'160px'}:{'--open-input':'0'})
     },
     checkScroll() {
-      let obj = null;
-      return (this.ifOverFlow ? obj = {overflow: 'scroll'} : obj = {overflow: 'hidden'})
+      return (this.ifOverFlow ? {overflow: 'auto'} :   {overflow: 'hidden'})
     },
 
     list() {
@@ -93,10 +95,19 @@ export default {
 </script>
 
 
-<style scoped>
-
+<style lang="scss" scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background:#42b983;
+}
+::-webkit-scrollbar-thumb {
+  background: #494b54;
+  border-radius: 10px;
+}
 .home {
-  background: #42b983;
+
   height: 50vh;
   display: flex;
   justify-content: center;
@@ -118,7 +129,6 @@ ul {
   padding: 0;
   color: white;
   font-size: 15px;
-  border-radius: 10px;
   list-style: none;
 
 }
@@ -134,23 +144,20 @@ ul li:hover {
   background: white;
 }
 
-
-.container1 {
+.input-field {
   position: absolute;
   justify-content: center;
   background: #2f3640;
   display: flex;
   align-items: center;
   height: 40px;
-  border-radius: 10px;
-
+  border-radius: 15px;
 }
 
 .icon-div {
   position: relative;
   transition: all .7s ease-in-out;
   color: #42b983;
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
@@ -159,23 +166,17 @@ ul li:hover {
 }
 
 input {
+  width: var(--open-input);
   border: none;
   outline: none;
   background: transparent;
   color: white;
-  width: 0;
   transition: all .3s ease-in-out;
 }
 
-/*.container1:hover  > .icon-div{*/
-
-/*   color: white;*/
-/*   width: 40px;*/
-/*    height:30px ;*/
-/*}*/
-
-/*.container1:hover  > input {*/
-/*  width:140px;*/
-/*}*/
+.flat-input-bottom{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
 </style>
