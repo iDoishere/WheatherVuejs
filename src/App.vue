@@ -1,40 +1,37 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link exact to="/">Home</router-link>
-      <router-link to="/Fav">Favorite</router-link>
-<!--  <NotificationsContainer></NotificationsContainer>-->
-      <div v-show="imgDisplay" class="wrapper-loading">
-        <img src="./assets/loader.gif" alt="">
-      </div>
+      <router-link to="/">Home</router-link>
+      <router-link to="/favorite">Favorite</router-link>
+      <!--  <NotificationsContainer></NotificationsContainer>-->
 
+      <!--      <div v-show="imgDisplay" class="wrapper-loading">-->
+      <!--        <img src="./assets/loader.gif" alt="">-->
+      <!--      </div>-->
     </div>
 
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
-
-  export default {
-   data(){
-     return{
-       imgDisplay:true
-     }
-   },
-    created() {
-
-      let element = document.getElementsByClassName("wrapper-loading");
-      setTimeout(()=> {
-        element[0].classList.remove("wrapper-loading");
-        this.imgDisplay = false
-      },3000)
-
-    },
-
+export default {
+  data() {
+    return {
+      imgDisplay: true
+    };
+  },
+  created() {
+    //
+    // let element = document.getElementsByClassName("wrapper-loading");
+    // setTimeout(()=> {
+    //   element[0].classList.remove("wrapper-loading");
+    //   this.imgDisplay = false
+    // },3000)
   }
+};
 </script>
 <style>
-.wrapper-loading{
+.wrapper-loading {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -47,14 +44,13 @@
   z-index: 100;
 }
 
-
 #nav {
-   display: flex;
+  display: flex;
   justify-content: center;
   height: 80px;
   align-items: center;
   background: #494b54;
-   list-style: none;
+  list-style: none;
 }
 
 #nav a {
@@ -64,17 +60,17 @@
   text-decoration: none;
 }
 #nav a::before {
-  content: '';
+  content: "";
   display: block;
   height: 2px;
-  background:  #42b983;
+  background: #42b983;
   width: 0;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   transform-origin: left;
 }
 
 #nav a:hover::before {
-  content: '';
+  content: "";
   width: 100%;
 }
 </style>
